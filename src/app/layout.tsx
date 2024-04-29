@@ -1,6 +1,7 @@
 import "~/styles/globals.css";
 import { Onest } from "next/font/google";
 import { TRPCReactProvider } from "~/trpc/react";
+import Script from "next/script";
 
 const onest = Onest({
 	subsets: ["latin"],
@@ -21,6 +22,10 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`font-sans ${onest.variable}`}>
+				<Script
+					src="https://eu.umami.is/script.js"
+					data-website-id="51efa585-c6e8-4bc2-a6c5-3b482aed079f"
+				/>
 				<TRPCReactProvider>{children}</TRPCReactProvider>
 			</body>
 		</html>
