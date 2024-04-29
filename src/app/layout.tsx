@@ -24,6 +24,7 @@ export default function RootLayout({
 			<body className={`font-sans ${onest.variable}`}>
 				<Script
 					src="https://eu.umami.is/script.js"
+					strategy="worker"
 					data-website-id="51efa585-c6e8-4bc2-a6c5-3b482aed079f"
 				/>
 				<TRPCReactProvider>{children}</TRPCReactProvider>
