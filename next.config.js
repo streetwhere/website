@@ -1,14 +1,21 @@
+import { composePlugins } from "./src/utils.js";
+import { next as withMillion } from "million/compiler";
+import withBundleAnalyzer from "@next/bundle-analyzer";
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
-await import("./src/env.js");
+const { env } = await import("./src/utils.js");
 
 /** @type {import("next").NextConfig} */
-const config = {
-	experimental: {
-		nextScriptWorkers: true,
-	},
+const nextConfig = {
+	reactStrictMode: true,
 };
 
-export default config;
+const plugins = [
+	withMillion,
+	withBundleAnalyzer({ enabled: env.ANALYZE === "true" }),
+];
+
+//@ts-ignore
+export default composePlugins(...plugins)(nextConfig);
