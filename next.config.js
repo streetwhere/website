@@ -2,15 +2,21 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
-await import('./src/env.js')
+await import('./src/utils.js')
 
 /** @type {import("next").NextConfig} */
-const config = {
+const nextConfig = {
 	eslint: {
 		ignoreDuringBuilds: true,
 	},
-	poweredByHeader: false,
+	images: {
+		formats: ['image/avif', 'image/webp'],
+	},
 	reactStrictMode: true,
+	experimental: {
+		serverComponentsExternalPackages: ['@node-rs/argon2'],
+		optimizeCss: true,
+	},
 }
 
-export default config
+export default nextConfig

@@ -23,7 +23,8 @@
 			},
 			"correctness": {
 				"noPrecisionLoss": "error",
-				"noUnusedVariables": "off"
+				"noUnusedVariables": "error",
+				"noUnusedImports": "error"
 			},
 			"style": {
 				"noInferrableTypes": "error",

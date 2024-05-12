@@ -1,13 +1,7 @@
+import { font } from '@/styles/font'
 import '@/styles/globals.css'
-
-import { Inter } from 'next/font/google'
-
 import { TRPCReactProvider } from '@/trpc/react'
-
-const inter = Inter({
-	subsets: ['latin'],
-	variable: '--font-sans',
-})
+import Script from 'next/script'
 
 export const metadata = {
 	title: 'Create T3 App',
@@ -21,8 +15,13 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<html lang="en">
-			<body className={`font-sans ${inter.variable}`}>
+		<html lang="en" className="dark">
+			<body className={font}>
+				<Script
+					src="https://eu.umami.is/script.js"
+					data-website-id="51efa585-c6e8-4bc2-a6c5-3b482aed079f"
+				/>
+
 				<TRPCReactProvider>{children}</TRPCReactProvider>
 			</body>
 		</html>
