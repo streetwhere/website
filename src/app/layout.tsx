@@ -2,6 +2,7 @@ import { font } from '@/styles/font'
 import '@/styles/globals.css'
 import { TRPCReactProvider } from '@/trpc/react'
 import Script from 'next/script'
+import { Toaster } from 'react-hot-toast'
 
 export const metadata = {
 	title: 'Create T3 App',
@@ -22,7 +23,16 @@ export default function RootLayout({
 					data-website-id="51efa585-c6e8-4bc2-a6c5-3b482aed079f"
 				/>
 
-				<TRPCReactProvider>{children}</TRPCReactProvider>
+				<TRPCReactProvider>
+					{children}
+					<Toaster
+						position="bottom-right"
+						toastOptions={{
+							className:
+								'!bg-card !text-white !border !border-grey-900/10',
+						}}
+					/>
+				</TRPCReactProvider>
 			</body>
 		</html>
 	)

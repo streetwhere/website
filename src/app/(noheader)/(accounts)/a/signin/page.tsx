@@ -12,9 +12,11 @@ import {
 import { Input } from '@/app/_components/ui/input'
 import { api } from '@/trpc/react'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { setCookie } from '../cookie-action'
 
 const FORM_SCHEMA = z.object({
 	username: z
@@ -24,11 +26,8 @@ const FORM_SCHEMA = z.object({
 		.max(24, 'Username can be atmost 24 charachters long!')
 		.regex(
 			/^[a-zA-Z0-9_-]+$/g,
-			'Username is not valid! (a-z, 0-9, - and _)',
+			'Username should only container valid charachters (a-z, 0-9, - and _)',
 		),
-	email: z
-		.string({ required_error: 'Email is required!' })
-		.email('Email is not valid!'),
 	password: z
 		.string({ required_error: 'Password is required!' })
 		.min(1, 'Password is required!')
@@ -36,14 +35,17 @@ const FORM_SCHEMA = z.object({
 		.max(32, 'Password can be atmost than 32 charachters!'),
 })
 
-export default function SignUpForm() {
+export default function SignInForm() {
 	const router = useRouter()
 	const form = useForm<z.infer<typeof FORM_SCHEMA>>({
 		resolver: zodResolver(FORM_SCHEMA),
 	})
 
-	const { mutate } = api.auth.signUp.useMutation({
-		onSuccess: () => router.push('/a/signin'),
+	const { mutate } = api.auth.signIn.useMutation({
+		onSuccess: (data) => {
+			setCookie(data)
+			router.push('/')
+		},
 	})
 
 	return (
@@ -60,24 +62,6 @@ export default function SignUpForm() {
 							<FormLabel>Username</FormLabel>
 							<FormControl>
 								<Input placeholder="streetwhere-" {...field} />
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name="email"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Email</FormLabel>
-							<FormControl>
-								<Input
-									placeholder="john.doe@mail.com"
-									type="email"
-									{...field}
-								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -103,7 +87,16 @@ export default function SignUpForm() {
 					)}
 				/>
 
-				<Button className="w-full mt-0" type="submit">
+				<Button variant="link" className="p-0 w-min" asChild>
+					<Link
+						className="-mb-7 text-xs opacity-70"
+						href={'/authenticate/reset-password'}
+					>
+						Forgot password?
+					</Link>
+				</Button>
+
+				<Button className="mt-0 w-full" type="submit">
 					Continue
 				</Button>
 			</form>

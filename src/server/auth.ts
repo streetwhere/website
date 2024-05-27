@@ -4,21 +4,22 @@ import { cookies } from 'next/headers'
 import { cache } from 'react'
 
 import type { Session, User } from 'lucia'
+import type { user } from './db/schema'
 
 export const lucia = new Lucia(luciaAdapter, {
 	sessionCookie: {
-		// this sets cookies with super long expiration
-		// since Next.js doesn't allow Lucia to extend cookie expiration when rendering pages
 		expires: false,
 		attributes: {
-			// set to `true` when using HTTPS
 			secure: process.env.NODE_ENV === 'production',
 		},
 	},
-	getUserAttributes: (attributes) => {
+	getUserAttributes: ({ email, username, fullname, pfp, role }) => {
 		return {
-			// attributes has the type of DatabaseUserAttributes
-			username: attributes.username,
+			email,
+			username,
+			fullname,
+			pfp,
+			role,
 		}
 	},
 
@@ -28,15 +29,12 @@ export const lucia = new Lucia(luciaAdapter, {
 declare module 'lucia' {
 	interface Register {
 		Lucia: typeof lucia
-		DatabaseUserAttributes: DatabaseUserAttributes
+		UserId: number
+		DatabaseUserAttributes: typeof user.$inferSelect
 	}
 }
 
-interface DatabaseUserAttributes {
-	username: string
-}
-
-export const validateRequest = cache(
+export const useUser = cache(
 	async (): Promise<
 		{ user: User; session: Session } | { user: null; session: null }
 	> => {
@@ -56,12 +54,14 @@ export const validateRequest = cache(
 				const sessionCookie = lucia.createSessionCookie(
 					result.session.id,
 				)
+
 				cookies().set(
 					sessionCookie.name,
 					sessionCookie.value,
 					sessionCookie.attributes,
 				)
 			}
+
 			if (!result.session) {
 				const sessionCookie = lucia.createBlankSessionCookie()
 				cookies().set(

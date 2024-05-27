@@ -20,6 +20,6 @@ export const db = drizzle(conn, { schema })
 export const luciaAdapter = new DrizzlePostgreSQLAdapter(
 	db,
 	// @ts-ignore
-	schema.sessions,
-	schema.users,
+	schema.session,
+	schema.user,
 )

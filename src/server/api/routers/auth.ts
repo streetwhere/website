@@ -4,7 +4,7 @@ import {
 	publicProcedure,
 } from '@/server/api/trpc'
 import { lucia } from '@/server/auth'
-import { users } from '@/server/db/schema'
+import { user as USER } from '@/server/db/schema'
 import { compare, hash } from '@/server/password'
 import { TRPCError } from '@trpc/server'
 import { eq } from 'drizzle-orm'
@@ -37,7 +37,7 @@ export const authRouter = createTRPCRouter({
 			const passwordHash = await hash(input.password)
 
 			try {
-				await ctx.db.insert(users).values({
+				await ctx.db.insert(USER).values({
 					username: input.username.toLowerCase(),
 					email: input.email.toLowerCase(),
 					password: passwordHash,
@@ -71,8 +71,8 @@ export const authRouter = createTRPCRouter({
 		.mutation(async ({ ctx, input }) => {
 			const [user] = await ctx.db
 				.select()
-				.from(users)
-				.where(eq(users.username, input.username.toLowerCase()))
+				.from(USER)
+				.where(eq(USER.username, input.username.toLowerCase()))
 
 			if (!user)
 				throw new TRPCError({
@@ -86,7 +86,7 @@ export const authRouter = createTRPCRouter({
 					code: 'BAD_REQUEST',
 				})
 
-			const session = await lucia.createSession(user.id.toString(), {})
+			const session = await lucia.createSession(user.id, {})
 			return lucia.createSessionCookie(session.id)
 		}),
 	signOut: protectedProcedure.mutation(async ({ ctx }) => {

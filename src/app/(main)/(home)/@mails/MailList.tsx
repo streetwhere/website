@@ -1,10 +1,10 @@
 'use client'
 
-import type { mails } from '@/server/db/schema'
+import type { mail } from '@/server/db/schema'
 import { Virtuoso } from 'react-virtuoso'
 
 interface MailProps {
-	mails: (typeof mails.$inferSelect)[]
+	mails: (typeof mail.$inferSelect)[]
 }
 
 export default function MailList({ mails }: MailProps) {

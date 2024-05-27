@@ -9,9 +9,9 @@ export default function AccountsLayout({ children }: PropsWithChildren) {
 		<div id="root" className="flex flex-col min-h-screen">
 			<div
 				role="navigation"
-				className="flex items-center justify-between h-16 px-5 py-2 border-b"
+				className="flex justify-between items-center py-2 px-5 h-16 border-b"
 			>
-				<Link href="/" className="flex items-center gap-2">
+				<Link href="/" className="flex gap-2 items-center">
 					<Image
 						src={'/icon.png'}
 						width={25}
@@ -22,14 +22,14 @@ export default function AccountsLayout({ children }: PropsWithChildren) {
 				</Link>
 
 				<Button className="w-min" variant="ghost" asChild>
-					<Link href={'/'} className="flex items-center gap-2 m-2">
+					<Link href={'/'} className="flex gap-2 items-center m-2">
 						<CornerDownLeft className="w-4 h-4" />
 						<span>Return</span>
 					</Link>
 				</Button>
 			</div>
 
-			<main className="flex items-center justify-center max-w-screen-lg pb-16 grow">
+			<main className="flex justify-center items-center pb-16 mx-auto w-full max-w-screen-lg grow">
 				{children}
 			</main>
 		</div>

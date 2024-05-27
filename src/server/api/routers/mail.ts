@@ -1,5 +1,5 @@
 import { createTRPCRouter, protectedProcedure } from '@/server/api/trpc'
-import { mails, shops } from '@/server/db/schema'
+import { mail as MAIL, shop as SHOP } from '@/server/db/schema'
 import { TRPCError } from '@trpc/server'
 import { eq } from 'drizzle-orm'
 import { z } from 'zod'
@@ -21,9 +21,9 @@ export const mailRouter = createTRPCRouter({
 		)
 		.query(async ({ ctx, input }) => {
 			const [shop] = await ctx.db
-				.select({ id: shops.id })
-				.from(shops)
-				.where(eq(shops.to, input.to.toLowerCase()))
+				.select({ id: SHOP.id })
+				.from(SHOP)
+				.where(eq(SHOP.to, input.to.toLowerCase()))
 
 			if (!shop)
 				throw new TRPCError({
@@ -31,11 +31,9 @@ export const mailRouter = createTRPCRouter({
 					code: 'BAD_REQUEST',
 				})
 
-			return ctx.db.select().from(mails).where(eq(mails.shopId, shop.id))
+			return ctx.db.select().from(MAIL).where(eq(MAIL.shopId, shop.id))
 		}),
 	list: protectedProcedure.query(async ({ ctx }) => {
-		//await _.sleep(2000)
-
-		return await ctx.db.select().from(mails)
+		return await ctx.db.select().from(MAIL)
 	}),
 })

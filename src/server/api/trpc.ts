@@ -11,7 +11,7 @@ import superjson from 'superjson'
 import { ZodError } from 'zod'
 
 import { db } from '@/server/db'
-import { validateRequest } from '../auth'
+import { useUser } from '../auth'
 
 /**
  * 1. CONTEXT
@@ -26,7 +26,7 @@ import { validateRequest } from '../auth'
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
-	const auth = await validateRequest()
+	const auth = await useUser()
 
 	return {
 		db,
@@ -104,7 +104,7 @@ export const protectedProcedure = t.procedure.use(
 				input,
 			})
 
-		const auth = await validateRequest()
+		const auth = await useUser()
 
 		if (auth)
 			return next({

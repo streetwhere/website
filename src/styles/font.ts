@@ -1,13 +1,18 @@
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
-import { Onest } from 'next/font/google'
-
-const geist = GeistSans.variable
-const geistMono = GeistMono.variable
+import { Inter, Onest, Unbounded } from 'next/font/google'
 
 const onest = Onest({
 	subsets: ['latin'],
 	variable: '--font-logo',
 })
 
-export const font: string = `${geist} ${geistMono} ${onest.variable} `
+const unbounded = Unbounded({
+	subsets: ['latin'],
+	variable: '--font-title',
+})
+
+const inter = Inter({
+	subsets: ['latin'],
+	variable: '--font-sans',
+})
+
+export const font: string = `${unbounded.variable} ${inter.variable} ${onest.variable} `

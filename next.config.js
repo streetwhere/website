@@ -15,8 +15,8 @@ const nextConfig = {
 	reactStrictMode: true,
 	experimental: {
 		serverComponentsExternalPackages: ['@node-rs/argon2'],
+		optimizePackageImports: ['radash'],
 		optimizeCss: true,
-		optimizeServerReact: true,
 	},
 }
 

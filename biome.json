@@ -23,7 +23,7 @@
 			},
 			"correctness": {
 				"noPrecisionLoss": "error",
-				"noUnusedVariables": "error",
+				"noUnusedVariables": "warn",
 				"noUnusedImports": "error"
 			},
 			"style": {
@@ -127,5 +127,14 @@
 				}
 			}
 		}
-	]
+	],
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"defaultBranch": "main",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"maxSize": 2097152
+	}
 }

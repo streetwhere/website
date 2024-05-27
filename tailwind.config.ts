@@ -14,9 +14,14 @@ const config = {
 			},
 		},
 		fontFamily: {
-			sans: ['--font-geist-sans', ...fontFamily.sans],
-			logo: ['--font-logo', '--font-geist-sans', ...fontFamily.sans],
-			mono: ['--font-geist-mono', ...fontFamily.mono],
+			sans: ['var(--font-sans)', ...fontFamily.sans],
+			logo: ['var(--font-logo)', ...fontFamily.sans],
+			title: [
+				'var(--font-title)',
+				'var(--font-sans)',
+				...fontFamily.sans,
+			],
+			mono: [...fontFamily.mono],
 		},
 		extend: {
 			colors: {

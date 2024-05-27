@@ -3,7 +3,7 @@ import type { PropsWithChildren } from 'react'
 
 export default function SignInLayout({ children }: PropsWithChildren) {
 	return (
-		<div className="flex flex-col max-w-md gap-10 grow">
+		<div className="flex flex-col gap-10 max-w-md grow">
 			<div className="flex flex-col">
 				<h1 className="text-4xl font-bold">Welcome Back!</h1>
 				<span className="text-sm opacity-70">

@@ -11,6 +11,7 @@ export const env = createEnv({
 		DATABASE_URL: z.string().url(),
 		UPLOADTHING_APP_ID: z.string().min(1),
 		UPLOADTHING_SECRET: z.string().min(1),
+		IMAP_USERNAME: z.string().min(1),
 		IMAP_WEBHOOK_SECRET: z.string().min(1),
 		VERCEL_URL: z.string().nullable().default(null),
 		NODE_ENV: z
@@ -36,6 +37,7 @@ export const env = createEnv({
 		UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
 		UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
 		VERCEL_URL: process.env.VERCEL_URL,
+		IMAP_USERNAME: process.env.IMAP_USERNAME,
 		IMAP_WEBHOOK_SECRET: process.env.IMAP_WEBHOOK_SECRET,
 		NODE_ENV: process.env.NODE_ENV,
 	},
