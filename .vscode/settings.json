@@ -7,7 +7,7 @@
 		"quickfix.biome": "explicit"
 	},
 
-	"[json][jsonc][javascript][typescript]": {
+	"[json][jsonc][javascript][typescript][typescriptreact][javascriptreact]": {
 		"editor.defaultFormatter": "biomejs.biome"
 	},
 

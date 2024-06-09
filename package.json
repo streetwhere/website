@@ -7,7 +7,7 @@
 		"build": "infisical run -c \"./start-database.sh && next build\"",
 		"db:push": "infisical run -c \"./start-database.sh && drizzle-kit push\"",
 		"db:studio": "infisical run -c \"./start-database.sh && drizzle-kit studio\"",
-		"dev": "infisical run -c \"./start-database.sh && next dev --turbo\"",
+		"dev": "infisical run -c \"./start-database.sh && next dev\"",
 		"lint": "infisical run -c \"./start-database.sh && biome check ./src\"",
 		"fix": "infisical run -c \"./start-database.sh && biome check ./src --apply --no-errors-on-unmatched\"",
 		"start": "infisical run -c \"./start-database.sh && next start\"",

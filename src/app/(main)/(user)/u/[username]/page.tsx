@@ -13,17 +13,15 @@ export default async function UserPage() {
 						alt="User"
 						width={224}
 						height={224}
-						className="w-56 h-56 rounded-full ring-2 ring-white ring-offset-2 ring-offset-background"
+						className="h-56 w-56 rounded-full ring-2 ring-white ring-offset-2 ring-offset-background"
 					/>
 				</div>
 
 				<div className="flex-[2]">
-					<div className="flex gap-2 items-center">
-						<span className="text-3xl font-title">
+					<div className="flex items-center gap-2">
+						<span className="font-title text-3xl">
 							@{user?.username}
 						</span>
-
-						<div className="h-8 border-l-[2px]"></div>
 					</div>
 				</div>
 			</div>

@@ -10,8 +10,8 @@ import { Button } from './ui/button'
 export default function Header({ user }: { user: User | null }) {
 	return (
 		<div role="navigation" className="border-b">
-			<div className="flex justify-between items-center py-2 px-5 mx-auto w-full max-w-screen-xl h-16">
-				<Link href="/" className="flex gap-2 items-center">
+			<div className="mx-auto flex h-16 w-full max-w-screen-xl items-center justify-between px-5 py-2">
+				<Link href="/" className="flex items-center gap-2">
 					<Image
 						src={icon}
 						width={35}
@@ -19,13 +19,13 @@ export default function Header({ user }: { user: User | null }) {
 						priority={true}
 						loading="eager"
 						alt="logo"
-						className="w-7 h-7"
+						className="h-7 w-7"
 					/>
 					<div className="flex flex-col">
-						<span className="text-base font-medium tracking-wide leading-snug font-title">
+						<span className="font-title text-base font-medium leading-snug tracking-wide">
 							streetwhere?
 						</span>
-						<span className="font-mono font-light tracking-tighter leading-none text-[0.57rem]">
+						<span className="font-mono text-[0.57rem] font-light leading-none tracking-tighter">
 							[BETA]
 						</span>
 					</div>
@@ -33,14 +33,14 @@ export default function Header({ user }: { user: User | null }) {
 
 				<div>
 					{user ? (
-						<div className="flex gap-5 items-center">
+						<div className="flex items-center gap-5">
 							<Button
-								className="flex gap-2 items-center w-min h-fit"
+								className="flex h-fit w-min items-center gap-2"
 								variant="default"
 								asChild
 							>
 								<Link href={'/shop/create'}>
-									<Plus className="w-4 h-4" />
+									<Plus className="h-4 w-4" />
 									<span className="text-xs">Add Store</span>
 								</Link>
 							</Button>
@@ -50,7 +50,7 @@ export default function Header({ user }: { user: User | null }) {
 							<AccountDropdown user={user} />
 						</div>
 					) : (
-						<div className="flex gap-5 justify-between items-center">
+						<div className="flex items-center justify-between gap-5">
 							<Button
 								className="w-min"
 								variant="secondary"
